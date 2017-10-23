@@ -22,7 +22,7 @@ namespace Walfrido.DML.Automation.Model.Dao.MySQL.DML
 
         public void Dispose()
         {
-            base.conn.Clone();
+            base.conn.Close();
         }
 
         public List<IColumn> GetColumns(string tableName)
