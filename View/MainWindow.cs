@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Walfrido.DML.Automation.View
 {
-    public partial class MainWindows : Form
+    public partial class MainWindow : Form
     {
         private Model.IParams paramsValue;
         private Model.Dao.IURL url;
@@ -19,7 +19,7 @@ namespace Walfrido.DML.Automation.View
 
         private int itemIdex;
 
-        public MainWindows()
+        public MainWindow()
         {
             InitializeComponent();
             comboBoxTipo.DataSource = Enum.GetValues(typeof(Model.Types.DML));
@@ -126,26 +126,35 @@ namespace Walfrido.DML.Automation.View
                 switch ((Model.Types.DML)Enum.Parse(typeof(Model.Types.DML), comboBoxTipo.SelectedItem.ToString()))
                 {
                     case Model.Types.DML.INSERT:
-                        dataGridViewConditions.Visible = false;
-                        listBoxColumns.Size = new System.Drawing.Size(843, 317);
+                        DataGridViewConditionsVisible();
                         break;
                     case Model.Types.DML.UPDATE:
-                        dataGridViewConditions.Visible = true;
-                        listBoxColumns.Size = new System.Drawing.Size(421, 317);
+                        DataGridViewConditionsVisible(true);
                         break;
                     case Model.Types.DML.DELETE:
-                        dataGridViewConditions.Visible = false;
-                        listBoxColumns.Size = new System.Drawing.Size(843, 317);
+                        DataGridViewConditionsVisible();
                         break;
                     case Model.Types.DML.SELECT:
-                        dataGridViewConditions.Visible = false;
-                        listBoxColumns.Size = new System.Drawing.Size(843, 317);
+                        DataGridViewConditionsVisible();
                         break;
                     default:
-                        dataGridViewConditions.Visible = false;
-                        listBoxColumns.Size = new System.Drawing.Size(843, 317);
+                        DataGridViewConditionsVisible();
                         break;
                 }
+            }
+        }
+
+        private void DataGridViewConditionsVisible(bool visible = false)
+        {
+            if (visible)
+            {
+                dataGridViewConditions.Visible = true;
+                listBoxColumns.Size = new Size(421, 317);
+            }
+            else
+            {
+                dataGridViewConditions.Visible = false;
+                listBoxColumns.Size = new Size(843, 317);
             }
         }
 
@@ -225,14 +234,14 @@ namespace Walfrido.DML.Automation.View
 
             if (paramUpdate.Conditions.ConditionList.Count >= 1)
             {
-                LogicalOperatorWIndows logicalOperatorWindows = new LogicalOperatorWIndows();
+                LogicalOperatorWIndow logicalOperatorWindows = new LogicalOperatorWIndow();
                 if (logicalOperatorWindows.ShowDialog() == DialogResult.OK)
                 {
                     condition.LogicalOperator = logicalOperatorWindows.GetSelectedOperator();
                 }
             }
 
-            OperatorWindows operatorWindows = new OperatorWindows();
+            OperatorWindow operatorWindows = new OperatorWindow();
             if(operatorWindows.ShowDialog() == DialogResult.OK)
             {
                 condition.Column = (Model.Column)e.Data.GetData(typeof(Model.Column));
