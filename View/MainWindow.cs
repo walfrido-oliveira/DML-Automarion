@@ -279,40 +279,5 @@ namespace Walfrido.DML.Automation.View
                 listBox.DoDragDrop(column, DragDropEffects.Copy);
             }
         }
-
-        //global brushes with ordinary/selected colors
-        private SolidBrush reportsForegroundBrushSelected = new SolidBrush(Color.White);
-        private SolidBrush reportsForegroundBrush = new SolidBrush(Color.Black);
-        private SolidBrush reportsBackgroundBrushSelected = new SolidBrush(Color.FromKnownColor(KnownColor.Silver));
-        private SolidBrush reportsBackgroundBrush1 = new SolidBrush(Color.White);
-        private SolidBrush reportsBackgroundBrush2 = new SolidBrush(Color.Gray);
-        private void listBoxColumns_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            e.DrawBackground();
-            bool selected = ((e.State & DrawItemState.Selected) == DrawItemState.Selected);
-
-            int index = e.Index;
-            if (index >= 0 && index < listBoxColumns.Items.Count)
-            {
-                string text = listBoxColumns.Items[index].ToString();
-                Graphics g = e.Graphics;
-
-                //background:
-                SolidBrush backgroundBrush;
-                if (selected)
-                    backgroundBrush = reportsBackgroundBrushSelected;
-                else if ((index % 2) == 0)
-                    backgroundBrush = reportsBackgroundBrush1;
-                else
-                    backgroundBrush = reportsBackgroundBrush2;
-                g.FillRectangle(backgroundBrush, e.Bounds);
-
-                //text:
-                SolidBrush foregroundBrush = (selected) ? reportsForegroundBrushSelected : reportsForegroundBrush;
-                g.DrawString(text, e.Font, foregroundBrush, listBoxColumns.GetItemRectangle(index).Location);
-            }
-
-            e.DrawFocusRectangle();
-        }
     }
 }
