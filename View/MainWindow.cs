@@ -1,14 +1,12 @@
-using System;
-using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Walfrido.DML.Automation.View
 {
     public partial class MainWindow : Form
     {
-        private Model.IParams paramsValue;
         private Model.Dao.IURL url;
         private Controller.IDMLController dml;
         private Controller.IColumnController columns;
@@ -44,14 +42,14 @@ namespace Walfrido.DML.Automation.View
             url.User = textBoxUser.Text;
         }
 
-        private void ConfSelectColumns()
+        private List<Model.IColumn> GetSelectColumns()
         {
-            System.Collections.Generic.List<Model.IColumn> columns = new System.Collections.Generic.List<Model.IColumn>();
+            List<Model.IColumn> columns = new List<Model.IColumn>();
             foreach (Model.IColumn item in listBoxColumns.SelectedItems)
             {
                 columns.Add(item);
             }
-            if(paramsValue != null) paramsValue.Columns = new Model.Columns(columns, textBoxParamName.Text);
+            return columns;
         }
 
         private void ConfResult()
@@ -68,7 +66,8 @@ namespace Walfrido.DML.Automation.View
                         if(dmlUpdate.ParamValues.Conditions != null) textBoxResult.Text = dml.GetQuery();
                         break;
                     case Model.Types.DML.DELETE:
-
+                        Controller.IDeleteController dmlDelete = (Controller.IDeleteController)dml;
+                        if (dmlDelete.ParamValues.Conditions != null) textBoxResult.Text = dml.GetQuery();
                         break;
                     case Model.Types.DML.SELECT:
 
@@ -88,10 +87,11 @@ namespace Walfrido.DML.Automation.View
                 switch ((Model.Types.DML)Enum.Parse(typeof(Model.Types.DML), comboBoxTipo.SelectedItem.ToString()))
                 {
                     case Model.Types.DML.INSERT:
-                        paramsValue = new Model.Params();
-                        paramsValue.Columns = new Model.Columns(columns.GetColumns(textBoxTable.Text),textBoxParamName.Text);
-                        paramsValue.TableName = textBoxTable.Text;
-                        dml = new Controller.InsertController(paramsValue);
+                        Model.IParamsInsert paramsInsert = new Model.ParamsInsert();
+                        paramsInsert.ParamName = textBoxParamName.Text;
+                        paramsInsert.Columns = new Model.Columns(GetSelectColumns(), textBoxParamName.Text);
+                        paramsInsert.TableName = textBoxTable.Text;
+                        dml = new Controller.InsertController(paramsInsert);
                         break;
                     case Model.Types.DML.UPDATE:
                         break;
@@ -132,7 +132,7 @@ namespace Walfrido.DML.Automation.View
                         DataGridViewConditionsVisible(true);
                         break;
                     case Model.Types.DML.DELETE:
-                        DataGridViewConditionsVisible();
+                        DataGridViewConditionsVisible(true);
                         break;
                     case Model.Types.DML.SELECT:
                         DataGridViewConditionsVisible();
@@ -142,6 +142,101 @@ namespace Walfrido.DML.Automation.View
                         break;
                 }
             }
+        }
+
+        private void dataGridViewConditions_DragDrop(object sender, DragEventArgs e)
+        {
+            Model.ICondition condition = new Model.Condition();
+            condition.Column = (Model.Column)e.Data.GetData(typeof(Model.Column));
+            LogicalOperatorWIndow logicalOperatorWindows = new LogicalOperatorWIndow();
+            OperatorWindow operatorWindows = new OperatorWindow();
+
+            switch ((Model.Types.DML)Enum.Parse(typeof(Model.Types.DML), comboBoxTipo.SelectedItem.ToString()))
+            {
+                case Model.Types.DML.UPDATE:
+
+                    Model.IParamsUpdate paramsUpdate;
+                    Controller.IUpdateController updateController = (Controller.IUpdateController)dml;
+
+                    if (updateController != null)
+                    {
+                        paramsUpdate = updateController.ParamValues;
+                    }
+                    else
+                    {
+                        paramsUpdate = new Model.ParamsUpdate();
+                        paramsUpdate.Columns = new Model.Columns(GetSelectColumns(), textBoxParamName.Text);
+                        paramsUpdate.TableName = textBoxTable.Text;
+                        paramsUpdate.ParamName = textBoxParamName.Text;
+                        updateController = new Controller.UpdateController(paramsUpdate);
+                    }
+
+                    if (paramsUpdate.Conditions.ConditionList.Count >= 1)
+                    {
+                        if (logicalOperatorWindows.ShowDialog() == DialogResult.OK)
+                        {
+                            condition.LogicalOperator = logicalOperatorWindows.GetSelectedOperator();
+                        }
+                    }
+
+                    if (operatorWindows.ShowDialog() == DialogResult.OK)
+                    {                     
+                        condition.Operator = operatorWindows.GetSelectedOperator();
+                        paramsUpdate.Conditions.ConditionList.Add(condition);
+                        
+                        dml = new Controller.UpdateController(paramsUpdate);
+
+                        dataGridViewConditions.Rows.Add(condition.Column, condition.Operator.OperatorValue);
+                    }
+                    break;
+
+                case Model.Types.DML.DELETE:
+                    Model.IParamsDelete paramsDelete;
+                    Controller.IDeleteController deleteController = (Controller.IDeleteController)dml;
+
+                    if (deleteController != null)
+                    {
+                        paramsDelete = deleteController.ParamValues;
+                    }
+                    else
+                    {
+                        paramsDelete = new Model.ParamsDelete();
+                        paramsDelete.TableName = textBoxTable.Text;
+                        paramsDelete.ParamName = textBoxParamName.Text;
+                        deleteController = new Controller.DeleteController(paramsDelete);
+                    }
+
+                    if (paramsDelete.Conditions.ConditionList.Count >= 1)
+                    {     
+                        if (logicalOperatorWindows.ShowDialog() == DialogResult.OK)
+                        {
+                            condition.LogicalOperator = logicalOperatorWindows.GetSelectedOperator();
+                        }
+                    }
+
+                   
+                    if (operatorWindows.ShowDialog() == DialogResult.OK)
+                    {
+                        condition.Operator = operatorWindows.GetSelectedOperator();
+                        paramsDelete.Conditions.ConditionList.Add(condition);
+
+                        dml = new Controller.DeleteController(paramsDelete);
+
+                        dataGridViewConditions.Rows.Add(condition.Column, condition.Operator.OperatorValue);
+                    }
+                    break;
+
+                case Model.Types.DML.SELECT:
+                    DataGridViewConditionsVisible();
+                    break;
+                default:
+                    DataGridViewConditionsVisible();
+                    break;
+            }
+
+            logicalOperatorWindows.Dispose();
+            operatorWindows.Dispose();
+
         }
 
         private void DataGridViewConditionsVisible(bool visible = false)
@@ -169,7 +264,6 @@ namespace Walfrido.DML.Automation.View
         private void buttonGetQuery_Click(object sender, EventArgs e)
         {
             ConfParamns();
-            ConfSelectColumns();
             ConfResult();
         }
 
@@ -209,52 +303,6 @@ namespace Walfrido.DML.Automation.View
             ConfForm();
             ConfURL();
             ConfCheckedListBox();
-        }
-
-        private void checkedListBoxColumns_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void dataGridViewConditions_DragDrop(object sender, DragEventArgs e)
-        {
-            Model.IParamsUpdate paramUpdate;
-            Model.ICondition condition = new Model.Condition();
-
-            if (paramsValue != null)
-            {
-                paramUpdate = (Model.IParamsUpdate)paramsValue;
-            }
-            else
-            {
-                paramUpdate = new Model.ParamsUpdate();
-                paramUpdate.Columns = new Model.Columns(columns.GetColumns(textBoxTable.Text), textBoxParamName.Text);
-                paramUpdate.TableName = textBoxTable.Text;
-            }
-
-            if (paramUpdate.Conditions.ConditionList.Count >= 1)
-            {
-                LogicalOperatorWIndow logicalOperatorWindows = new LogicalOperatorWIndow();
-                if (logicalOperatorWindows.ShowDialog() == DialogResult.OK)
-                {
-                    condition.LogicalOperator = logicalOperatorWindows.GetSelectedOperator();
-                }
-            }
-
-            OperatorWindow operatorWindows = new OperatorWindow();
-            if(operatorWindows.ShowDialog() == DialogResult.OK)
-            {
-                condition.Column = (Model.Column)e.Data.GetData(typeof(Model.Column));
-                condition.Operator = operatorWindows.GetSelectedOperator();
-                paramUpdate.Conditions.ConditionList.Add(condition);
-
-
-                dml = new Controller.UpdateController(paramUpdate);
-
-                paramsValue = paramUpdate;
-
-                dataGridViewConditions.Rows.Add(condition.Column, condition.Operator.OperatorValue);
-            }
         }
 
         private void dataGridViewConditions_DragOver(object sender, DragEventArgs e)

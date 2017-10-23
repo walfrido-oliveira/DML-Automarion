@@ -1,7 +1,11 @@
-﻿namespace Walfrido.DML.Automation.Model
+﻿using System;
+using System.Collections.Generic;
+namespace Walfrido.DML.Automation.Model
 {
     interface IUpdate : IDML
     {
         IConditions Conditions { get; set; }
+        IColumns Columns { get; set; }
+        List<Object> Values { get; set; }
     }
 }

@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\ColumnsController.cs" />
+    <Compile Include="Controller\DeleteController.cs" />
     <Compile Include="Controller\IColumnController.cs" />
+    <Compile Include="Controller\IDeleteController.cs" />
     <Compile Include="Controller\IInsertController.cs" />
     <Compile Include="Controller\InsertController.cs" />
     <Compile Include="Controller\IDMLController.cs" />
@@ -68,45 +70,52 @@
     <Compile Include="Model\Dao\MySQL\ConnectionFactory.cs" />
     <Compile Include="Model\Dao\MySQL\DML\ColumnDao.cs" />
     <Compile Include="Model\Dao\URL.cs" />
+    <Compile Include="Model\Delete.cs" />
     <Compile Include="Model\IColumns.cs" />
     <Compile Include="Model\ICondition.cs" />
     <Compile Include="Model\IConditions.cs" />
+    <Compile Include="Model\IDelete.cs" />
+    <Compile Include="Model\IDeleteParams.cs" />
     <Compile Include="Model\IDML.cs" />
     <Compile Include="Model\IColumn.cs" />
+    <Compile Include="Model\IInsert.cs" />
     <Compile Include="Model\Insert.cs" />
+    <Compile Include="Model\IParamsDelete.cs" />
     <Compile Include="Model\IParams.cs" />
+    <Compile Include="Model\IParamsInsert.cs" />
     <Compile Include="Model\IParamsUpdate.cs" />
     <Compile Include="Model\IUpdate.cs" />
     <Compile Include="Model\Operator.cs" />
-    <Compile Include="Model\Params.cs" />
+    <Compile Include="Model\ParamsDelete.cs" />
+    <Compile Include="Model\ParamsInsert.cs" />
     <Compile Include="Model\ParamsUpdate.cs" />
     <Compile Include="Model\Types.cs" />
     <Compile Include="Model\Update.cs" />
-    <Compile Include="View\LogicalOperatorWIndows.cs">
+    <Compile Include="View\LogicalOperatorWIndow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\LogicalOperatorWIndows.Designer.cs">
-      <DependentUpon>LogicalOperatorWIndows.cs</DependentUpon>
+    <Compile Include="View\LogicalOperatorWIndow.Designer.cs">
+      <DependentUpon>LogicalOperatorWIndow.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\MainWindows.cs">
+    <Compile Include="View\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\MainWindows.Designer.cs">
-      <DependentUpon>MainWindows.cs</DependentUpon>
+    <Compile Include="View\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\OperatorWindows.cs">
+    <Compile Include="View\OperatorWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\OperatorWindows.Designer.cs">
-      <DependentUpon>OperatorWindows.cs</DependentUpon>
+    <Compile Include="View\OperatorWindow.Designer.cs">
+      <DependentUpon>OperatorWindow.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\LogicalOperatorWIndows.resx">
-      <DependentUpon>LogicalOperatorWIndows.cs</DependentUpon>
+    <EmbeddedResource Include="View\LogicalOperatorWIndow.resx">
+      <DependentUpon>LogicalOperatorWIndow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\MainWindows.resx">
-      <DependentUpon>MainWindows.cs</DependentUpon>
+    <EmbeddedResource Include="View\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -118,8 +127,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\OperatorWindows.resx">
-      <DependentUpon>OperatorWindows.cs</DependentUpon>
+    <EmbeddedResource Include="View\OperatorWindow.resx">
+      <DependentUpon>OperatorWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

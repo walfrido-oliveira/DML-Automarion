@@ -12,11 +12,6 @@ namespace Walfrido.DML.Automation.Model
             this.ConditionList = new List<ICondition>();
         }
 
-        public string InsertQuote(string value)
-        {
-            return "`" + value + "`";
-        }
-
         public string GetStringCondition(string paramName, int lastIndex)
         {
             StringBuilder query = new StringBuilder();
@@ -28,13 +23,13 @@ namespace Walfrido.DML.Automation.Model
                     switch (item.Operator.Operador)
                     {
                         case Types.OPERATOR.BETWEEN:
-                            query.Append(" WHERE " + InsertQuote(item.Column.Name) + " " + item.Operator.OperatorValue + " " +
+                            query.Append(" WHERE " + Columns.InsertQuote(item.Column.Name) + " " + item.Operator.OperatorValue + " " +
                                          "@" + paramName + "_" + (lastIndex + 1) +  " AND " + "@" + paramName + "_" + (lastIndex + 2) + " ");
                             break;
                         case Types.OPERATOR.IN:
                             break;
                         default:
-                            query.Append(" WHERE " + InsertQuote(item.Column.Name) + " " + item.Operator.OperatorValue + " " + "@" + paramName + "_" + (lastIndex + 1) + " ");
+                            query.Append(" WHERE " + Columns.InsertQuote(item.Column.Name) + " " + item.Operator.OperatorValue + " " + "@" + paramName + "_" + (lastIndex + 1) + " ");
                             break;
                     }
                 }
@@ -43,13 +38,13 @@ namespace Walfrido.DML.Automation.Model
                     switch (item.Operator.Operador)
                     {
                         case Types.OPERATOR.BETWEEN:
-                            query.Append(item.LogicalOperator.ToString() + " " + InsertQuote(item.Column.Name) + " " + item.Operator.OperatorValue + " " + "@" +
+                            query.Append(item.LogicalOperator.ToString() + " " + Columns.InsertQuote(item.Column.Name) + " " + item.Operator.OperatorValue + " " + "@" +
                                          paramName + "_" + (lastIndex + 1 + count) + " AND " + "@" + paramName + "_" + (lastIndex + 2 + count) + " ");
                             break;
                         case Types.OPERATOR.IN:
                             break;
                         default:
-                            query.Append(item.LogicalOperator.ToString() + " " + InsertQuote(item.Column.Name) + " " + item.Operator.OperatorValue + " " +
+                            query.Append(item.LogicalOperator.ToString() + " " + Columns.InsertQuote(item.Column.Name) + " " + item.Operator.OperatorValue + " " +
                                          "@" + paramName + "_" + (lastIndex + 1 + count) + " ");
                             break;
                     }

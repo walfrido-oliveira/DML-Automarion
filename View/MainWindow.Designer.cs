@@ -1,6 +1,6 @@
 ﻿namespace Walfrido.DML.Automation.View
 {
-    partial class MainWindows
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindows));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.panelDML = new System.Windows.Forms.Panel();
             this.listBoxColumns = new System.Windows.Forms.ListBox();
             this.dataGridViewConditions = new System.Windows.Forms.DataGridView();
@@ -93,7 +93,6 @@
             this.listBoxColumns.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listBoxColumns.Size = new System.Drawing.Size(421, 316);
             this.listBoxColumns.TabIndex = 19;
-            this.listBoxColumns.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxColumns_DrawItem);
             this.listBoxColumns.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBoxColumns_MouseDown);
             // 
             // dataGridViewConditions
@@ -238,6 +237,7 @@
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.Size = new System.Drawing.Size(933, 20);
             this.textBoxUser.TabIndex = 7;
+            this.textBoxUser.Text = "root";
             // 
             // textBoxPort
             // 
@@ -247,6 +247,7 @@
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(933, 20);
             this.textBoxPort.TabIndex = 6;
+            this.textBoxPort.Text = "3306";
             // 
             // textBoxPassword
             // 
@@ -256,6 +257,7 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(933, 20);
             this.textBoxPassword.TabIndex = 5;
+            this.textBoxPassword.Text = "sysdba";
             // 
             // textBoxHostname
             // 
@@ -275,6 +277,7 @@
             this.textBoxDataBase.Name = "textBoxDataBase";
             this.textBoxDataBase.Size = new System.Drawing.Size(933, 20);
             this.textBoxDataBase.TabIndex = 3;
+            this.textBoxDataBase.Text = "sgv";
             // 
             // tabControl
             // 
@@ -396,7 +399,7 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // MainWindows
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -406,7 +409,7 @@
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MainWindows";
+            this.Name = "MainWindow";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "DML Automation";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainWindows_MouseDown);

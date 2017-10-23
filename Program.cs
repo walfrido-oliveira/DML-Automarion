@@ -13,7 +13,7 @@ namespace Walfrido.DML.Automation
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new View.MainWindows());
+            Application.Run(new View.MainWindow());
         }
     }
 }

@@ -2,8 +2,8 @@
 {
     class InsertController : IInsertController
     {
-        public Model.IParams ParamValues { get; set; }
-        public InsertController(Model.IParams paramValues)
+        public Model.IParamsInsert ParamValues { get; set; }
+        public InsertController(Model.IParamsInsert paramValues)
         {
             this.ParamValues = paramValues;
         }

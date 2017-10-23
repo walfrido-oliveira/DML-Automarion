@@ -9,10 +9,12 @@ namespace Walfrido.DML.Automation.Model
         public string TableName { get; set; }
         public List<object> Values { get; set; }
         public IConditions Conditions { get; set; }
+        public string ParamName { get; set; }
 
         public Update(IParamsUpdate @params)
         {
             Columns = @params.Columns;
+            ParamName = @params.ParamName;
             TableName = @params.TableName;
             Values = @params.Values;
             Conditions = @params.Conditions;
@@ -20,14 +22,12 @@ namespace Walfrido.DML.Automation.Model
 
         public string GetQuery()
         {
-            StringBuilder query = new StringBuilder(Types.DML.UPDATE.ToString()  + " " + Columns.InsertQuote(TableName) + " SET ");
-            int count = 0;
+            StringBuilder query = new StringBuilder(Types.DML.UPDATE.ToString()  + " " + Model.Columns.InsertQuote(TableName) + " SET ");
             foreach (IColumn column in Columns.ColumnsList)
             {
                 query.Append(Columns.GetColumnString(column, Types.DML.UPDATE));
-                count++;
             }
-            query.Append(Conditions.GetStringCondition(Columns.ParamName, Columns.GetLastIndex()));
+            query.Append(Conditions.GetStringCondition(ParamName, Columns.GetLastIndex()));
             return query.ToString();
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace Walfrido.DML.Automation.View
 {
-    partial class LogicalOperatorWIndows
+    partial class LogicalOperatorWIndow
     {
         /// <summary>
         /// Required designer variable.

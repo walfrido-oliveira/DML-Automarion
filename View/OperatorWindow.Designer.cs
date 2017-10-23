@@ -1,6 +1,6 @@
 ﻿namespace Walfrido.DML.Automation.View
 {
-    partial class OperatorWindows
+    partial class OperatorWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OperatorWindows));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OperatorWindow));
             this.panel = new System.Windows.Forms.Panel();
             this.comboBoxOperators = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();

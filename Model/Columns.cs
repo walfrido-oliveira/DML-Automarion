@@ -54,7 +54,7 @@ namespace Walfrido.DML.Automation.Model
             return string.Empty;
         }
 
-        public string InsertQuote(string value)
+        public static string InsertQuote(string value)
         {
             return "`" + value + "`";
         }

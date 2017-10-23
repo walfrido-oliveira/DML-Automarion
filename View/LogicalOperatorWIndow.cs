@@ -1,15 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Walfrido.DML.Automation.View
 {
-    public partial class OperatorWindow : Form
+    public partial class LogicalOperatorWIndow : Form
     {
         private Boolean drag;
         private int mouseX;
         private int mouseY;
 
-        public OperatorWindow()
+        public LogicalOperatorWIndow()
         {
             InitializeComponent();
         }
@@ -40,9 +47,9 @@ namespace Walfrido.DML.Automation.View
             e.Handled = true;
         }
 
-        public Model.Operator GetSelectedOperator()
+        public Model.Types.LOGICAL_OPERATOR GetSelectedOperator()
         {
-           return new Model.Operator((Model.Types.OPERATOR)comboBoxOperators.SelectedIndex + 1);
+            return (Model.Types.LOGICAL_OPERATOR)comboBoxOperators.SelectedIndex + 1;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)

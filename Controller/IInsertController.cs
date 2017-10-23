@@ -2,6 +2,6 @@
 {
     interface IInsertController : IDMLController
     {
-        Model.IParams ParamValues { get; set; }
+        Model.IParamsInsert ParamValues { get; set; }
     }
 }
