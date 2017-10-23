@@ -237,7 +237,6 @@
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.Size = new System.Drawing.Size(933, 20);
             this.textBoxUser.TabIndex = 7;
-            this.textBoxUser.Text = "root";
             // 
             // textBoxPort
             // 
@@ -247,7 +246,6 @@
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(933, 20);
             this.textBoxPort.TabIndex = 6;
-            this.textBoxPort.Text = "3306";
             // 
             // textBoxPassword
             // 
@@ -257,7 +255,6 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(933, 20);
             this.textBoxPassword.TabIndex = 5;
-            this.textBoxPassword.Text = "sysdba";
             // 
             // textBoxHostname
             // 
@@ -267,7 +264,6 @@
             this.textBoxHostname.Name = "textBoxHostname";
             this.textBoxHostname.Size = new System.Drawing.Size(933, 20);
             this.textBoxHostname.TabIndex = 4;
-            this.textBoxHostname.Text = "localhost";
             // 
             // textBoxDataBase
             // 
@@ -277,7 +273,6 @@
             this.textBoxDataBase.Name = "textBoxDataBase";
             this.textBoxDataBase.Size = new System.Drawing.Size(933, 20);
             this.textBoxDataBase.TabIndex = 3;
-            this.textBoxDataBase.Text = "sgv";
             // 
             // tabControl
             // 
