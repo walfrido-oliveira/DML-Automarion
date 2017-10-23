@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{609CADEC-D9D1-410B-B0B5-EC16D08BB8C5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Walfrido.DML.Automation</RootNamespace>
+    <AssemblyName>DML-Automation</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>main.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\ColumnsController.cs" />
+    <Compile Include="Controller\IColumnController.cs" />
+    <Compile Include="Controller\IInsertController.cs" />
+    <Compile Include="Controller\InsertController.cs" />
+    <Compile Include="Controller\IDMLController.cs" />
+    <Compile Include="Controller\IUpdateController.cs" />
+    <Compile Include="Controller\UpdateController.cs" />
+    <Compile Include="Model\Column.cs" />
+    <Compile Include="Model\Columns.cs" />
+    <Compile Include="Model\Condition.cs" />
+    <Compile Include="Model\Conditions.cs" />
+    <Compile Include="Model\Dao\IColumnsDao.cs" />
+    <Compile Include="Model\Dao\IURL.cs" />
+    <Compile Include="Model\Dao\MySQL\AbstractDao.cs" />
+    <Compile Include="Model\Dao\MySQL\ConnectionFactory.cs" />
+    <Compile Include="Model\Dao\MySQL\DML\ColumnDao.cs" />
+    <Compile Include="Model\Dao\URL.cs" />
+    <Compile Include="Model\IColumns.cs" />
+    <Compile Include="Model\ICondition.cs" />
+    <Compile Include="Model\IConditions.cs" />
+    <Compile Include="Model\IDML.cs" />
+    <Compile Include="Model\IColumn.cs" />
+    <Compile Include="Model\Insert.cs" />
+    <Compile Include="Model\IParams.cs" />
+    <Compile Include="Model\IParamsUpdate.cs" />
+    <Compile Include="Model\IUpdate.cs" />
+    <Compile Include="Model\Operator.cs" />
+    <Compile Include="Model\Params.cs" />
+    <Compile Include="Model\ParamsUpdate.cs" />
+    <Compile Include="Model\Types.cs" />
+    <Compile Include="Model\Update.cs" />
+    <Compile Include="View\LogicalOperatorWIndows.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\LogicalOperatorWIndows.Designer.cs">
+      <DependentUpon>LogicalOperatorWIndows.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainWindows.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainWindows.Designer.cs">
+      <DependentUpon>MainWindows.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\OperatorWindows.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\OperatorWindows.Designer.cs">
+      <DependentUpon>OperatorWindows.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="View\LogicalOperatorWIndows.resx">
+      <DependentUpon>LogicalOperatorWIndows.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MainWindows.resx">
+      <DependentUpon>MainWindows.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="View\OperatorWindows.resx">
+      <DependentUpon>OperatorWindows.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="main.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
